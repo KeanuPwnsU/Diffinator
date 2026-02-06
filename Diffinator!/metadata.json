@@ -1,0 +1,5 @@
+{
+  "name": "Apex Diff-Vision Protocol",
+  "description": "A high-performance, token-optimized diff visualization tool with Gemini 3 Flash integration for smart change analysis and lightweight screenshot export.",
+  "requestFramePermissions": []
+}
