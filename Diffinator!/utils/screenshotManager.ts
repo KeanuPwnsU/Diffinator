@@ -12,8 +12,7 @@ export async function captureAndZipHunks(
   if (!folder) throw new Error("Failed to create zip folder");
 
   // 1. Identify relevant blocks (Moves, Adds, Removes)
-  // We skip 'unchanged' blocks to save tokens, unless they provide context?
-  // The prompt says "only the diff slices... that actually has changes".
+  // We skip 'unchanged' blocks to save tokens.
   const changedBlocks = blocks.filter(b => b.type !== 'unchanged');
 
   if (changedBlocks.length === 0) {
@@ -30,18 +29,22 @@ export async function captureAndZipHunks(
       try {
         // High fidelity capture
         const canvas = await html2canvas(element, {
-          backgroundColor: null, // Transparent background if possible, or inherit
-          scale: 2, // Retina quality for Vision model clarity
+          backgroundColor: '#0a0a0c', // Force dark background to match theme (prevent blank/transparent images)
+          scale: 2, // Retina quality
           logging: false,
-          ignoreElements: (el) => el.classList.contains('no-capture')
+          ignoreElements: (el) => el.classList.contains('no-capture'),
+          useCORS: true // Ensure external assets (fonts) load if possible
         });
 
         const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, 'image/png'));
         
         if (blob) {
-          // Filename: type_lines_index.png
+          // Filename: index_type_line.png
+          // Ensure file names sort correctly (padding index if needed, but standard sort handles numbers well in most OS)
+          // We'll pad the index to 3 digits for military precision sorting
+          const indexStr = (i + 1).toString().padStart(3, '0');
           const startLine = block.startLineOriginal !== -1 ? block.startLineOriginal : block.startLineNew;
-          const fileName = `${i + 1}_${block.type}_line${startLine}.png`;
+          const fileName = `${indexStr}_${block.type}_line${startLine}.png`;
           folder.file(fileName, blob);
         }
       } catch (err) {

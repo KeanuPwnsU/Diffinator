@@ -1,9 +1,9 @@
 export const COLORS = {
   bg: {
-    moveOut: '#ffcccc', // Light Red (Moves on Original)
-    remove: '#ff9999',  // Dark Red (Deletions)
-    moveIn: '#ccffcc',  // Light Green (Moves on New)
-    add: '#99ff99',     // Dark Green (Additions)
+    moveOut: '#ffe3e3', // Light Red (Moves on Original)
+    remove: '#ff8a80',  // Darker Red (Deletions) - using a vibrant red that supports black text
+    moveIn: '#e3fafc',  // Light Cyan/Green (Moves on New)
+    add: '#81c784',     // Darker Green (Additions) - using a vibrant green that supports black text
     unchanged: 'transparent'
   },
   text: {
