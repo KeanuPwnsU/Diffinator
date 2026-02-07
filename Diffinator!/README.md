@@ -2,19 +2,50 @@
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# Run and deploy your AI Studio app
+# Operation Native Shell: Apex Diff-Vision Protocol
 
-This contains everything you need to run your app locally.
+This project has been upgraded to a **Military-Grade Desktop Application** using Electron. It runs locally on your machine, free from browser constraints.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1e6iZ8p9FrBQjBezMCAmrW-s9bCPcpc4j
+## 1. Installation (First Time Setup)
 
-## Run Locally
+Open your terminal in the project directory and run:
 
-**Prerequisites:**  Node.js
+```bash
+npm install
+```
+*This installs all necessary dependencies, including the Electron runtime and build tools.*
 
+## 2. Running Locally (Development Mode)
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+To start the application in "Dev Mode" (with hot-reloading enabled):
+
+```bash
+npm run electron:dev
+```
+*This will launch the local Vite server and open the desktop application window.*
+
+## 3. Building the Executable (Production)
+
+To compile the application into a standalone `.exe` (Windows), `.dmg` (Mac), or `.AppImage` (Linux):
+
+```bash
+npm run dist
+```
+
+**Output Location:**
+The installer/executable will be generated in the `release/` directory.
+- **Windows:** `release/ApexDiffVision Setup 1.0.0.exe`
+- **Mac:** `release/ApexDiffVision-1.0.0.dmg`
+
+## 4. Configuration
+
+**API Keys:**
+Ensure your `.env.local` file is present in the root directory if you plan to use Gemini AI features.
+```
+GEMINI_API_KEY=your_key_here
+```
+
+## Troubleshooting
+
+- **Blank Screen?** Ensure you ran `npm install` to get the latest dependencies.
+- **Build Errors?** If `npm run dist` fails, ensure you are not running it inside a restricted environment (like a web container). It works best on a real Windows/Mac machine.
